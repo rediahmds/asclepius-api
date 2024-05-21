@@ -23,7 +23,7 @@ const loadModel = require("../services/loadModel");
   server.ext("onPreResponse", function (request, h) {
     const response = request.response;
 
-    if (response.isBoom && response.statusCode === 413) {
+    if (response.isBoom && response.output.statusCode === 413) {
       const newResponse = h
         .response({
           status: "fail",
@@ -35,21 +35,16 @@ const loadModel = require("../services/loadModel");
       return newResponse;
     }
 
-    if (response instanceof InputError) {
-      // InputError akan berasal dari file InputError.js
+    if (response instanceof InputError || response.isBoom) {
+      const statusCode =
+        response instanceof InputError
+          ? response.statusCode
+          : response.output.statusCode;
       const newResponse = h.response({
         status: "fail",
-        message: `${response.message} Silakan gunakan foto lain.`,
+        message: "Terjadi kesalahan dalam melakukan prediksi",
       });
-      newResponse.code(response.statusCode);
-      return newResponse;
-    }
-    if (response.isBoom) {
-      const newResponse = h.response({
-        status: "fail",
-        message: response.message,
-      });
-      newResponse.code(response.statusCode);
+      newResponse.code(statusCode);
       return newResponse;
     }
     return h.continue;
