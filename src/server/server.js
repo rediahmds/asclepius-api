@@ -1,6 +1,9 @@
+require("dotenv").config();
+
 const Hapi = require("@hapi/hapi");
 const routes = require("./routes");
 const InputError = require("../exceptions/InputError");
+const loadModel = require("../services/loadModel");
 
 (async () => {
   const server = Hapi.server({
@@ -12,7 +15,9 @@ const InputError = require("../exceptions/InputError");
       },
     },
   });
+  const model = await loadModel();
 
+  server.app.model = model; // attach model to the web service
   server.route(routes);
 
   server.ext("onPreResponse", function (request, h) {
@@ -51,5 +56,9 @@ const InputError = require("../exceptions/InputError");
   });
 
   server.start();
-  console.log(`Server is running on ${server.info.uri}`);
+  console.log(
+    `[INFO][${new Date().toLocaleTimeString()}] Server is running on ${
+      server.info.uri
+    }`
+  );
 })();
