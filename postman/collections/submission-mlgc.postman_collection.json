@@ -44,7 +44,7 @@
 						{
 							"key": "image",
 							"type": "file",
-							"src": "/D:/MLGC/submissions/data tes/data-test-submissions/bad-request.jpg"
+							"src": "/home/rediahmds/develop/asclepius-api/postman/inputdata/bad-request.jpg"
 						}
 					]
 				},
@@ -100,7 +100,7 @@
 						{
 							"key": "image",
 							"type": "file",
-							"src": "/D:/MLGC/submissions/data tes/data-test-submissions/more-than-1mb.jpg"
+							"src": "/home/rediahmds/develop/asclepius-api/postman/inputdata/more-than-1mb.jpg"
 						}
 					]
 				},
@@ -175,7 +175,7 @@
 						{
 							"key": "image",
 							"type": "file",
-							"src": "/D:/MLGC/submissions/data tes/data-test-submissions/cancer-1.png"
+							"src": "/home/rediahmds/develop/asclepius-api/postman/inputdata/cancer-1.png"
 						},
 						{
 							"key": "last",
