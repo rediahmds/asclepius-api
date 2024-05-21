@@ -1,6 +1,6 @@
 const predictClassification = require("../services/inferenceService");
 const crypto = require("crypto");
-const storeData = require("../services/storeData");
+const { storeData, getHistories } = require("../services/firestoreInteract");
 
 const postPredictHandler = async (request, h) => {
   const { image } = request.payload;
@@ -30,4 +30,14 @@ const postPredictHandler = async (request, h) => {
   return response;
 };
 
-module.exports = postPredictHandler;
+const getPredictionHistories = async (request, h) => {
+  const histories = await getHistories();
+
+  return h
+    .response({
+      status: "success",
+      data: histories,
+    })
+    .code(200);
+};
+module.exports = { postPredictHandler, getPredictionHistories };
