@@ -7,8 +7,8 @@ const loadModel = require("../services/loadModel");
 
 (async () => {
   const server = Hapi.server({
-    host: "localhost",
-    port: 3000,
+    host: "0.0.0.0",
+    port: 8080,
     routes: {
       cors: {
         origin: ["*"],
